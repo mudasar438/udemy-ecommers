@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import {useState} from 'react'
-import './App.css';
+// import './App.css';
 // import './catageries.style.scss'
 // import CategoryItem from './component/catagery-item/category-item.component';
 
 import { Routes, Route } from 'react-router-dom';
 import Navigation from './routes/navigation/navigation.component'
 import Home from './routes/home/home.components';
-import SignIn from './routes/sign-in/sign.component';
+import SignIn from './routes/sign-in/authentication.component';
 
 
 

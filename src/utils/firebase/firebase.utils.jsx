@@ -3,8 +3,10 @@ import { initializeApp } from "firebase/app";
 import {
     getAuth,
     signInWithRedirect,
+    signInWithEmailAndPassword,
     signInWithPopup,
     GoogleAuthProvider,
+    createUserWithEmailAndPassword,
   } from 'firebase/auth';
 
   
@@ -28,20 +30,28 @@ provider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-    if (!userAuth) return;
+// export const createUserProfileDocument = async (userAuth, additionalData) => {
+//     if (!userAuth) return;
   
-    console.log(userAuth);
-  };
+//     console.log(userAuth);
+//   };
   
   export const auth = getAuth();
   export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
-  export const db = getFirestore();
+  //firbase database
+export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+
+// manually User add in the Form
+export const createUserDocumentFromAuth = async (userAuth,additionalInformation = {}) => {
+
+    // if user is not here then return nothing
+  if (!userAuth) return;
+console.log("usercome from inputs",additionalInformation)
+ // rafrance of data base users is the name of collection
   const userDocRef = doc(db, 'users', userAuth.uid);
- console.log("userDoc refrance",userDocRef)
+
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
@@ -53,11 +63,27 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
+      
     } catch (error) {
       console.log('error creating the user', error.message);
     }
   }
 
   return userDocRef;
-}
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+//Sign in With Email and Password which is stord in FireDatabase
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+};
