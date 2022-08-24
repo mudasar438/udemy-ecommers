@@ -50,7 +50,7 @@ export const createUserDocumentFromAuth = async (userAuth,additionalInformation 
 
     // if user is not here then return nothing
   if (!userAuth) return;
-console.log("usercome from inputs",additionalInformation)
+// console.log("usercome from inputs",additionalInformation)
  // rafrance of data base users is the name of collection
   const userDocRef = doc(db, 'users', userAuth.uid);
 

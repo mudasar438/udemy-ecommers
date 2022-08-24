@@ -27,7 +27,7 @@ const SignIn = () => {
     setFormFields({ ...formFields, [name]: value });
     
   };
-  console.log("fom data",formFields)
+  // console.log("fom data",formFields)
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();

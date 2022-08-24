@@ -17,7 +17,7 @@ useEffect(()=>{
             createUserDocumentFromAuth(user)
         }
         setCurrentUser(user)
-        console.log("user in context", user)
+        // console.log("user in context", user)
         
     });
     return unSubscribe;
