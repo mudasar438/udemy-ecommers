@@ -1,7 +1,8 @@
 import { async } from "@firebase/util";
 import React from "react";
-import {useState} from 'react'
-import {signInAuthUserWithEmailAndPassword} from '../../utils/firebase/firebase.utils'
+import {useState,useContext} from 'react'
+// import { UserContext } from "../../contexts/user.context";
+import {signInAuthUserWithEmailAndPassword,signInWithGooglePopup} from '../../utils/firebase/firebase.utils'
 
 
 const defaultFormFields = {
@@ -17,6 +18,8 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  // const {setCurrentUser} = useContext(UserContext)
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,13 +29,20 @@ const SignIn = () => {
   };
   console.log("fom data",formFields)
 
+  const signInWithGoogle = async () => {
+    await signInWithGooglePopup();
+  };
+
+
   const handleSubmit = async(e)=>{
     e.preventDefault()
-    console.log("This is the form fields",formFields)
+   
 try{
 
-  await signInAuthUserWithEmailAndPassword(email,password)
+  const {user} = await signInAuthUserWithEmailAndPassword(email,password)
+  // setCurrentUser(user)
   alert("User login ")
+  // console.log("sigin", user)
 }
 catch(err){
   alert("Email or password wrong")
@@ -72,6 +82,9 @@ catch(err){
           Submit
         </button>
       </form>
+     
+
+      <button className="bg-green-400 p-1 my-1 rounded-sm " onClick={signInWithGoogle}>Sing in With Google</button>
     </div>
   );
 };
