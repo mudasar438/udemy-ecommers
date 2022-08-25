@@ -1,5 +1,6 @@
 import { async } from "@firebase/util";
 import React from "react";
+import { Link } from "react-router-dom";
 import {useState,useContext} from 'react'
 // import { UserContext } from "../../contexts/user.context";
 import { useNavigate } from "react-router-dom";
@@ -91,6 +92,7 @@ catch(err){
      
 
       <button className="bg-green-400 p-1 my-1 rounded-sm " onClick={signInWithGoogle}>Sing in With Google</button>
+      <div className=""><Link to='signup'>Do not Have Account</Link></div>
     </div>
   );
 };

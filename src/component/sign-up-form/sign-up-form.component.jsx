@@ -2,7 +2,7 @@ import { useState,useContext } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 // import { UserContext } from '../../contexts/user.context';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import {
@@ -20,6 +20,7 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  const Navigate =  useNavigate()
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -39,6 +40,8 @@ const SignUpForm = () => {
 
     try {
       const { user } = await createAuthUserWithEmailAndPassword(email,password);
+      localStorage.setItem('username',JSON.stringify(user))
+      Navigate('/home')
 
       // setCurrentUser(user)
       await createUserDocumentFromAuth(user, { displayName });
@@ -106,7 +109,7 @@ const SignUpForm = () => {
         />
         <Button type='submit'>Sign Up</Button>
       </form>
-      <Link to={'/'} className=' p-2' >Donot have Account</Link>
+      {/* <Link to={'/'} className=' p-2' >Donot have Account</Link> */}
     </div>
   );
 };

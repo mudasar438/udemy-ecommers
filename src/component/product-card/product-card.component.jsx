@@ -10,6 +10,7 @@ const ProductCard = ({ product }) => {
 const addProductToCart =()=>{
 
     addItemToCart(product);
+    alert("Product add in to Cart")
 }
 
   return (
