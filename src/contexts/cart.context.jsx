@@ -3,6 +3,7 @@ import { useState, createContext, useEffect } from "react";
 
 
 const addCartItem = (cartItems,productToAdd)=>{
+  // console.log("cart Items in context",cartItems)
     const existingCartItem = cartItems.find((cartItem)=>cartItem.id ===  productToAdd.id) 
     if (existingCartItem) {
         return cartItems.map((cartItem) =>
@@ -62,10 +63,7 @@ export const CartProvider = ({children})=>{
     const [cartTotal, setCartTotal] = useState(0);
 
     useEffect(()=>{
-        const count = cartItems.reduce(
-            (total, cartItem) => total + cartItem.quantity,
-            0
-          );
+        const count = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0 );
           setCartItemCount(count);
 
     },[cartItems])
@@ -81,6 +79,7 @@ export const CartProvider = ({children})=>{
 
 
     const addItemToCart =(productToAdd)=>{
+      console.log(cartItems)
         setCartItems(addCartItem(cartItems,productToAdd))
 
     }

@@ -100,4 +100,5 @@ export const signOutUser =async ()=>{
 
 export const onAuthStateChangedListener = (callback)=>{
   onAuthStateChanged(auth,callback)
+  // console.log("callbackfunction",callback)
 }
