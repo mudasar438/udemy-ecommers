@@ -5,6 +5,7 @@ import {onAuthStateChangedListener,createUserDocumentFromAuth} from '../utils/fi
 export const UserContext = createContext({
     currentUser: null,
     setCurrentUser: () => null,
+    
 
 });
 
