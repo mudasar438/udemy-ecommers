@@ -2,6 +2,7 @@ import { async } from "@firebase/util";
 import React from "react";
 import {useState,useContext} from 'react'
 // import { UserContext } from "../../contexts/user.context";
+import { useNavigate } from "react-router-dom";
 import {signInAuthUserWithEmailAndPassword,signInWithGooglePopup} from '../../utils/firebase/firebase.utils'
 
 
@@ -17,6 +18,7 @@ const defaultFormFields = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const Navigate = useNavigate();
 
   // const {setCurrentUser} = useContext(UserContext)
 
@@ -31,6 +33,7 @@ const SignIn = () => {
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
+    Navigate('/home')
   };
 
 
@@ -40,7 +43,9 @@ const SignIn = () => {
 try{
 
   const {user} = await signInAuthUserWithEmailAndPassword(email,password)
+  Navigate('/home')
   // setCurrentUser(user)
+ 
   alert("User login ")
   // console.log("sigin", user)
 }

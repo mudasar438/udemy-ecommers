@@ -2,6 +2,7 @@ import { useState,useContext } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 // import { UserContext } from '../../contexts/user.context';
+import { Link } from 'react-router-dom';
 
 
 import {
@@ -105,7 +106,7 @@ const SignUpForm = () => {
         />
         <Button type='submit'>Sign Up</Button>
       </form>
-      <span className=' p-2'>Donot have Account</span>
+      <Link to={'/'} className=' p-2' >Donot have Account</Link>
     </div>
   );
 };

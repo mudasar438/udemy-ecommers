@@ -1,5 +1,5 @@
 import { Fragment,useContext } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link ,useNavigate} from 'react-router-dom';
 import CartIcon from '../../component/cart-icon/cart-icon.component';
 import {ReactComponent as CrwnLogo} from '../../assets/CrwnLogo.svg'
 import { UserContext } from '../../contexts/user.context';
@@ -11,9 +11,17 @@ import { CartContext } from '../../contexts/cart.context';
 import './navigation.styles.scss'
 
 const Navigation = () => {
+  const Navigate =  useNavigate()
+
 
   const {currentUser}=useContext(UserContext)
   const {isCartOpen} = useContext(CartContext)
+
+  const logOut = ()=>{
+    signOutUser()
+    Navigate('/')
+
+  }
   // console.log("in nav ",currentUser)
   // console.log("This is the current user in navbar", currentUser)
 
@@ -28,7 +36,7 @@ const Navigation = () => {
   return (
     <Fragment>
       <div className='navigation'>
-        <Link className='logo-container' to='/'>
+        <Link className='logo-container' to='/home'>
           <CrwnLogo className='logo' />
         </Link>
         <div className='nav-links-container'>
@@ -36,10 +44,10 @@ const Navigation = () => {
             SHOP
           </Link>
             {
-              currentUser ? (<span className='nav-link' onClick={signOutUser}>SIGN OUT</span>):
-          <Link className='nav-link' to='/auth'>
-            SIGN IN
-          </Link>
+              currentUser ? (<span className='nav-link' onClick={logOut}>SIGN OUT</span>):null
+          // <Link className='nav-link' to='/signup'>
+          //   SIGN IN
+          // </Link>
             }
 
             <CartIcon />
