@@ -12,6 +12,7 @@ import SignIn from "./component/form-input/form-input.component";
 
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
+import Protected from "./component/protected/private";
 
 
 
@@ -25,10 +26,10 @@ function App() {
           <Route path="/signup" element={<SignUpForm/>} />
           {/* <Route path="/navigation" element={<Navigation />} /> */}
 
-          <Route path="/home" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/home" element={<Protected Component = {Home}/>} />
+          <Route path="/shop" element={<Protected Component = {Shop}/>} />
         
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Protected Component = {Checkout}/>} />
        
       </Routes>
     </>

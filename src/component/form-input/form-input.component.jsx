@@ -43,6 +43,7 @@ const SignIn = () => {
 try{
 
   const {user} = await signInAuthUserWithEmailAndPassword(email,password)
+  localStorage.setItem('username',JSON.stringify(user))
   Navigate('/home')
   // setCurrentUser(user)
  

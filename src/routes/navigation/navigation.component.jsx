@@ -19,6 +19,7 @@ const Navigation = () => {
 
   const logOut = ()=>{
     signOutUser()
+    localStorage.removeItem("username");
     Navigate('/')
 
   }
