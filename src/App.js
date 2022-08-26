@@ -20,7 +20,7 @@ function App() {
   // const [categories,setCategories] = useState(array)
   return (
     <>
-        <Navigation/>
+       
       <Routes>
         <Route path="/" element={<SignIn/>}/>
           <Route path="/signup" element={<SignUpForm/>} />

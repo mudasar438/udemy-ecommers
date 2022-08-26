@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useContext } from "react";
+import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import Button from "../button/button.component";
@@ -10,10 +10,11 @@ import "./cart-dropdown.styles.scss";
 
 const CartDropdown = () =>{
   const Navigate = useNavigate()
-    const {cartItems}= useContext(CartContext)
+    const {cartItems,setIsCartOpen}= useContext(CartContext)
     
 
     const goToCheackOut = ()=>{
+      setIsCartOpen(false)
       Navigate("/checkout")
     }
  return(

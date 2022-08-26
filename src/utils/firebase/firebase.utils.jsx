@@ -10,6 +10,7 @@ import {
     signOut,
     onAuthStateChanged 
   } from 'firebase/auth';
+  import { useNavigate } from "react-router-dom";
 
   
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
@@ -39,7 +40,22 @@ provider.setCustomParameters({
 //   };
   
   export const auth = getAuth();
-  export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+  export const signInWithGooglePopup =async () => {
+    try{
+
+     await signInWithPopup(auth, provider)
+      localStorage.setItem("username", JSON.stringify(auth));
+      // Navigate('/home')
+  
+      console.log("auth",auth)
+  
+      console.log("Provider," , provider)
+    }catch(err){
+      console.log("error with sigin google", err.message)
+
+    }
+    
+    }
 
   //firbase database
 export const db = getFirestore();

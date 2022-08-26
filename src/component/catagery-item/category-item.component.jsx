@@ -2,7 +2,9 @@ import './category-item.styles.scss';
 
 const CategoryItem = ({ category }) => {
   const {  title,imageUrl } = category;
+  // console.log("my category",category)
   return (
+    <>
     <div className='category-container'>
       <div
         className='background-image'
@@ -15,6 +17,11 @@ const CategoryItem = ({ category }) => {
         <p>Shop Now</p>
       </div>
     </div>
+
+
+
+ 
+    </>
   );
 };
 
