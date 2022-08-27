@@ -9,11 +9,11 @@ const Directory = ({categories}) => {
   return (
    <>
 
-   <div className="h-screen bg-slate-50 justify-center items-center w-full ">
+   <div className="h-screen bg-slate-50 justify-center items-center w-full  ">
 
       
 
-     <div className=" grid grid-col-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mx-2  md:p-5 mb-12 ">
+     <div className=" grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-2  md:p-5 mb-12 ">
                 {categories.map((item) => {
                   return (
                     <div className="w-full p-1  md:p-2 my-12  " key={item.id}>

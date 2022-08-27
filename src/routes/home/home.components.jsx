@@ -33,10 +33,10 @@ const Home = () => {
       },
       ];
   return (
-    <><div className="flex flex-col">
+    <><div className="flex flex-col ">
 
      <Navigation/>
-    <div >
+    <div className=' mt-[100px] md:mt-[50px]' >
 
 
       <Directory  categories={categories}/>

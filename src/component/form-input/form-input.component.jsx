@@ -57,9 +57,9 @@ const SignIn = () => {
 
   return (
     <>
-      <div class="h-screen bg-slate-200 flex justify-center items-center w-full">
-        <form  onSubmit={handleSubmit}>
-          <div class="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm">
+      <div class="mt-12 md:h-screen md:mt-0  md:bg-slate-200 flex   justify-center items-center w-full">
+        <form  onSubmit={handleSubmit} >
+          <div class="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm border ">
             
             <div class="space-y-4">
               <h1 class="text-center text-2xl font-semibold text-gray-600">
@@ -76,7 +76,7 @@ const SignIn = () => {
                 <input
                  
                   class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-                  placeholder="Email"
+                
                   type="email"
                   required
                   onChange={handleChange}
@@ -91,7 +91,7 @@ const SignIn = () => {
                   Password
                 </label>
                 <input
-                  placeholder="confirm Password"
+                
                   type="password"
                   // className="bg-green-300 m-2 p-1 rounded-md"
                   required
