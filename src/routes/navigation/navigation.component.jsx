@@ -57,9 +57,14 @@ const Navigation = () => {
             <li className="border border-yellow-400 m-1">HOME</li>
             </Link>
           </ul>
-          <ul>
+          {/* <ul>
             <Link to='/shop'>
             <li className="border border-yellow-400 m-1">SHOP</li>
+            </Link>
+          </ul> */}
+          <ul>
+            <Link to='/dashbord'>
+            <li className="border border-yellow-400 m-1">Dashbord</li>
             </Link>
           </ul>
                 <ul>
@@ -98,6 +103,12 @@ const Navigation = () => {
               to="/shop"
             >
               SHOP
+            </Link>
+            <Link
+              className=" text-gray-600 font-semibold ml-2  hover:text-blue-400"
+              to="/dashbord"
+            >
+              DSHBORD
             </Link>
             {
               currentUser ? (

@@ -1,27 +1,45 @@
 import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-// import { UserContext } from '../../contexts/user.context';
+import { UserContext } from "../../contexts/user.context";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
+import {
+  getAuth,
+ 
+} from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc, collection ,addDoc } from 'firebase/firestore';
+import {db} from '../../utils/firebase/firebase.utils'
 
 import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
   displayName: "",
+  lastName: "",
   email: "",
   password: "",
   confirmPassword: "",
+  phoneNumber: "",
 };
 
 const SignUpForm = () => {
+  const auth = getAuth()
+  const { setAllUser } = useContext(UserContext);
   const Navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+
+  const {
+    displayName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    phoneNumber,
+  } = formFields;
 
   // const {setCurrentUser} = useContext(UserContext)
 
@@ -31,7 +49,6 @@ const SignUpForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (password !== confirmPassword) {
       alert("passwords do not match");
       return;
@@ -42,12 +59,12 @@ const SignUpForm = () => {
         email,
         password
       );
-      localStorage.setItem("username", JSON.stringify(user));
-      Navigate("/home");
+      createUserDocumentFromAuth()
+      // localStorage.setItem("username", JSON.stringify(user));
+      // Navigate("/home");
 
-      // setCurrentUser(user)
-      await createUserDocumentFromAuth(user, { displayName });
-      alert(displayName + " Profile add in Firebase");
+      // setAllUser(formFields);
+
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -64,6 +81,29 @@ const SignUpForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const createUserDocumentFromAuth = async ( ) => {
+    const userDocRef = collection(db, "usersData");
+     const createdAt = new Date();
+     console.log("this is form data",formFields)
+
+      try {
+        await addDoc(userDocRef, {
+          displayName,
+          lastName,
+          email,
+          password,
+          confirmPassword,
+          phoneNumber,
+          createdAt,
+        });
+      } catch (error) {
+        console.log("error creating the user", error.message);
+      }
+    
+
+    return userDocRef;
+  };
+
   return (
     <>
       <div class="mt-12 md:h-screen md:mt-0  md:bg-slate-200 flex   justify-center items-center w-full">
@@ -78,7 +118,7 @@ const SignUpForm = () => {
                   for="email"
                   class="block mb-1 text-gray-600 font-semibold"
                 >
-                  Username
+                  FirstName
                 </label>
                 <input
                   class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
@@ -86,6 +126,21 @@ const SignUpForm = () => {
                   required
                   onChange={handleChange}
                   name="displayName"
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block mb-1 text-gray-600 font-semibold"
+                >
+                  LastName
+                </label>
+                <input
+                  class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
+                  type="text"
+                  required
+                  onChange={handleChange}
+                  name="lastName"
                 />
               </div>
               <div>
@@ -128,10 +183,24 @@ const SignUpForm = () => {
                 </label>
                 <input
                   type="password"
-                  
                   required
                   onChange={handleChange}
                   name="confirmPassword"
+                  class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-[99%]"
+                />
+              </div>
+              <div>
+                <label
+                  for="number"
+                  class="block mb-1 text-gray-600 font-semibold"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  onChange={handleChange}
+                  name="phoneNumber"
                   class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-[99%]"
                 />
               </div>
@@ -142,8 +211,6 @@ const SignUpForm = () => {
             >
               Sign Up
             </button>
-           
-           
           </div>
         </form>
       </div>

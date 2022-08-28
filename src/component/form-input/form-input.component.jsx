@@ -104,12 +104,12 @@ const SignIn = () => {
             <button type="submit" class="mt-4 w-full bg-yellow-500 hover:bg-yellow-400 font-semibold py-2 rounded-md  tracking-wide">
               Sign In
             </button>
-            <button
+            {/* <button
          className="mt-12 w-full bg-white font-semibold py-2 rounded-md  border border-yellow-300 tracking-wide hover:bg-indigo-100 hover:borde"
           onClick={signInWithGoogle}
         >
           <span className="flex items-center justify-around "><div className="w-[30px]"><img src={google} alt="" srcset="" /></div> <p>Sign in With Google</p></span>
-        </button>
+        </button> */}
             <Link to="signup">
         <p class="text-sm font-light text-gray-500 dark:text-gray-400 mt-4">
                       Don’t have an account yet ? <span className="text-blue-700 font-semibold hover:text-lg">Sign Up</span>  

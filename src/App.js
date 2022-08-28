@@ -13,6 +13,7 @@ import SignIn from "./component/form-input/form-input.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 import Protected from "./component/protected/private";
+import {Dashbord} from './component/Dashbord/dashbord'
 
 
 
@@ -28,6 +29,7 @@ function App() {
 
           <Route path="/home" element={<Protected Component = {Home}/>} />
           <Route path="/shop" element={<Protected Component = {Shop}/>} />
+          <Route path="/dashbord" element={<Protected Component = {Dashbord}/>}/>
         
           <Route path="/checkout" element={<Protected Component = {Checkout}/>} />
        

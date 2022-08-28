@@ -5,13 +5,18 @@ import {onAuthStateChangedListener,createUserDocumentFromAuth} from '../utils/fi
 export const UserContext = createContext({
     currentUser: null,
     setCurrentUser: () => null,
+
+    allUser:null,
+    setAllUser:()=>null,
+
     
 
 });
 
 export const UserProvider  = ({children})=>{
     const [currentUser, setCurrentUser] = useState(null);
-    const value = { currentUser, setCurrentUser };
+    const [allUser,setAllUser]=useState(null)
+    const value = { currentUser, setCurrentUser,setAllUser };
 useEffect(()=>{
     const unSubscribe = onAuthStateChangedListener((user)=>{
         if(user){
