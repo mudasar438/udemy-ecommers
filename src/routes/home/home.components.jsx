@@ -1,9 +1,33 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import Directory from '../../component/directory/directory.component'
 import  Navigation from '../navigation/navigation.component'
+import { CartContext } from '../../contexts/cart.context';
+import {GetallData} from '../../component/Dashbord/getallData'
+import { getUsers } from "../../component/Dashbord/api";
+
 const Home = () => {
+  const {allData,setAllData}=useContext(CartContext) 
+  useEffect(() => {
+
+    getalluser();
+  }, []);
+  const getalluser = async () => {
+    try {
+      console.log("function runing");
+
+      let response = await getUsers();
+      console.log("from MongoDb",response);
+      setAllData(response.data)
+     
+     
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
     const categories = [
         
       {
@@ -32,6 +56,7 @@ const Home = () => {
         imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
       },
       ];
+      // console.log("hompage data",allData)
   return (
     <><div className="flex flex-col ">
 
@@ -39,7 +64,11 @@ const Home = () => {
     <div className=' mt-[100px] md:mt-[50px]' >
 
 
-      <Directory  categories={categories}/>
+      <Directory  categories={allData}/>
+      <div className="mt-[200px]">
+
+      <GetallData/>
+      </div>
       <Outlet/>
    
     </div>

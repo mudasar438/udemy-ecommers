@@ -1,27 +1,28 @@
-import React, { useState,useEffect } from 'react'
-import { getUsers } from './api';
+import React, { useState, useEffect,useContext } from "react";
+import { CartContext } from "../../contexts/cart.context";
+import { getUsers } from "./api";
+
 export const GetallData = () => {
-    const [userData,setUserData]=useState([])
-      // console.log(search);
+  const {setAllData,allData} = useContext(CartContext)
+  const [userData, setUserData] = useState([]);
+
   useEffect(() => {
-    // console.log('clicked')
+
     getalluser();
-}, []);
-// console.log(users,"users")
+  }, []);
+
   const getalluser = async () => {
-    try{
-        console.log("function runing")
+    try {
+      console.log("function runing");
 
       let response = await getUsers();
-      console.log(response)
+      console.log(response);
+      setAllData(response.data)
       setUserData(response.data);
-    }
-    catch(error){
-      console.error(error)
+    } catch (error) {
+      console.error(error);
     }
   };
-  console.log('dataa coming from mongo db',userData)
-  return (
-    <div>getallData</div>
-  )
-}
+  // console.log("dataa coming from mongo db", userData);
+  return <div>getallData</div>;
+};

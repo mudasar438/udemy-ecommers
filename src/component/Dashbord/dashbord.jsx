@@ -3,8 +3,9 @@ import axios from "axios";
 import { useState } from "react";
 import { addUser } from "./api";
 import { GetallData } from "./getallData";
-import { storage } from "../../utils/firebase/firebase.utils";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import FileBase64 from "react-file-base64";
+
+const url = "http://localhost:8000";
 
 const allinput = {
   houseName: "",
@@ -13,65 +14,49 @@ const allinput = {
   detail: "",
   squirFeet: "",
   price: "",
-  // housImg:'',
+  housImg: "",
 };
 
 export const Dashbord = () => {
   const [data, setData] = useState(allinput);
-  const [progress, setProgress] = useState(0);
-  const [downloadURL, setDownloadURL] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setData({ ...data, [name]: value });
   };
 
-  const handleUpload = (e) => {
-    let file = e.target.files[0];
-
-    console.log(file);
-
-    if (!file) return;
-
-    // Create a reference to 'mountains.jpg'
-    const fileRef = ref(storage, "images/" + file.name);
-    console.log("file runing ")
-
-    const uploadTask = uploadBytesResumable(fileRef, file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        console.log("Upload is " + progress + "% done");
-
-        setProgress(progress);
+  async function handleUpload() {
+    const options = {
+      url: `${url}/add`,
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
       },
-      (error) => {
+      data: {
+        houseName: data.houseName,
+        location: data.location,
+        rooms: data.rooms,
+        detail: data.detail,
+        squirFeet: data.squirFeet,
+        price: data.price,
+        housImg: data.housImg,
+      },
+    };
+    await axios(options)
+      .then((response) => {
+        alert("data add into mongodb");
+      })
+      .catch((error) => {
         console.log(error);
-        // Handle unsuccessful uploads
-      },
-      () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-          setDownloadURL(downloadURL);
-          setData({...data,["imageUrl"]:downloadURL})
-        });
-      }
-    );
-  };
+      });
+  }
   const submit = async (e) => {
     e.preventDefault();
-    await addUser(data);
+    await handleUpload();
     setData(allinput);
- 
-    alert("data add in mongodb");
   };
-
 
   return (
     <>
@@ -182,21 +167,21 @@ export const Dashbord = () => {
                   >
                     Uploding Image
                   </label>
-                  <input
+                  <FileBase64
                     className="w-full px-3  mt-5 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                     type="file"
-                   
-                    onChange={handleUpload}
-                    accept="image/*"
+                    // name="housImg"
+                    multiple={false}
+                    onDone={({ base64 }) =>
+                      setData({ ...data, housImg: base64 })
+                    }
                   />
                 </div>
 
                 <div className="mb-6 text-center">
                   <button
-                    className="w-full mt-5 px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    className="w-full mt-5 px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline border-2 border-black"
                     type="submit"
-                    onClick={handleUpload}
-                    // onClick={uplode}
                   >
                     Uplode
                   </button>
@@ -204,8 +189,6 @@ export const Dashbord = () => {
                 <hr className="mb-6 border-t" />
               </form>
             </div>
-
-            {/* // 2nd item */}
           </div>
         </div>
         <div className=" px-6 my-12  ">
@@ -214,7 +197,7 @@ export const Dashbord = () => {
         </div>
       </div>
 
-      <GetallData />
+      {/* <GetallData /> */}
     </>
   );
 };

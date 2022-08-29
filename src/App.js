@@ -14,6 +14,7 @@ import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 import Protected from "./component/protected/private";
 import {Dashbord} from './component/Dashbord/dashbord'
+import Cart from './component/directory/cart'
 
 
 
@@ -30,6 +31,8 @@ function App() {
           <Route path="/home" element={<Protected Component = {Home}/>} />
           <Route path="/shop" element={<Protected Component = {Shop}/>} />
           <Route path="/dashbord" element={<Protected Component = {Dashbord}/>}/>
+          <Route path="/cart" element={<Cart/>}/>
+
         
           <Route path="/checkout" element={<Protected Component = {Checkout}/>} />
        
