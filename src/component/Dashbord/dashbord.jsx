@@ -55,7 +55,7 @@ export const Dashbord = () => {
   const submit = async (e) => {
     e.preventDefault();
     await handleUpload();
-    setData(allinput);
+    // setData(allinput);
   };
 
   return (
@@ -178,14 +178,14 @@ export const Dashbord = () => {
                   />
                 </div>
 
-                <div className="mb-6 text-center">
+               
                   <button
                     className="w-full mt-5 px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline border-2 border-black"
                     type="submit"
                   >
                     Uplode
                   </button>
-                </div>
+               
                 <hr className="mb-6 border-t" />
               </form>
             </div>

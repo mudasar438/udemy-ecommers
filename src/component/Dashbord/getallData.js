@@ -1,9 +1,11 @@
 import React, { useState, useEffect,useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
+import { ProductContext } from "../../contexts/products.context";
 import { getUsers } from "./api";
 
 export const GetallData = () => {
   const {setAllData,allData} = useContext(CartContext)
+  // const {Product} = useContext(ProductContext)
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {

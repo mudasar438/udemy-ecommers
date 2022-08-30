@@ -1,19 +1,24 @@
 import { Fragment, useContext, useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import CartIcon from "../../component/cart-icon/cart-icon.component";
-import { ReactComponent as CrwnLogo } from "../../assets/CrwnLogo.svg";
+import   logo  from "../../assets/assets/images/logo.png";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CartDropdown from "../../component/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../contexts/cart.context";
 import SwipeableTemporaryDrawer from "../../component/drawer/drawer";
 import { AiOutlineMenu } from "react-icons/ai";
+import { ProductContext } from "../../contexts/products.context";
 
 import "./navigation.styles.scss";
 
 const Navigation = () => {
+  const {Product} = useContext(ProductContext)
+  const [find, setFind]=useState(Product)
   const [show, setShow] = useState(true);
   const Navigate = useNavigate();
+
+  console.log("navigitation product search",Product)
 
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
@@ -37,7 +42,7 @@ const Navigation = () => {
     <Fragment>
       <div className="flex relative justify-between items-center border  border-yellow-400 bg-slate-50 w-full p-2  md:h-[70px] lg:h-[80px]">
         <Link className="logo-container" to="/home">
-          <CrwnLogo className="logo" />
+         <img src={logo} alt=""className="w-[150px]" srcset="" />
         </Link>
         <div className="block md:hidden">
           <button onClick={() => setShow((s) => !s)}>
@@ -90,20 +95,28 @@ const Navigation = () => {
             </li>
           </ul>
         </div>
-        <div className=" w-[40%] md:flex justify-end items-center hidden ">
-          <div className="flex items-center justify-end md:w-full lg:w-[70%]  ">
+        <div className=" w-[85%] md:flex justify-between items-center hidden  ">
+
+          <div className="flex items-center w-[20%]   ">
+
             <Link
-              className=" text-gray-600 font-semibold hover:text-blue-400 mr-3"
+              className=" text-gray-600 font-semibold mx-3 hover:text-blue-400 mr-3"
               to="/home"
             >
-              HOME
+               HOME
             </Link>
             <Link
-              className=" text-gray-600 font-semibold  hover:text-blue-400"
+              className=" text-gray-600 font-semibold mx-3  hover:text-blue-400"
               to="/shop"
             >
               SHOP
             </Link>
+            
+             
+          </div>
+         
+
+          <div className="flex items-center justify-end md:w-full lg:w-[30%]  ">
             <Link
               className=" text-gray-600 font-semibold ml-2  hover:text-blue-400"
               to="/dashbord"

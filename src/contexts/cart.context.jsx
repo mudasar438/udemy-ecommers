@@ -1,13 +1,13 @@
 import { useState, createContext, useEffect } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
-  // console.log("cart Items in context",cartItems)
+  console.log("cart Items in context",cartItems)
   const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === productToAdd.id
+    (cartItem) => cartItem._id === productToAdd._id
   );
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
-      cartItem.id === productToAdd.id
+      cartItem._id === productToAdd._id
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     );
@@ -90,8 +90,9 @@ export const CartProvider = ({ children }) => {
 
 
   const addItemToCart = (productToAdd) => {
-    console.log(cartItems);
     setCartItems(addCartItem(cartItems, productToAdd));
+    // console.log("add Item to cart",cartItems); 
+    console.log("===>ffff",productToAdd._id)
   };
 
   const removeItemToCart = (cartItemToRemove) => {
@@ -108,7 +109,7 @@ export const CartProvider = ({ children }) => {
 
      
     }; 
-    console.log("hellooooooooo", viewDetail)
+    // console.log("hellooooooooo", viewDetail)
 
   const value = {
     isCartOpen,

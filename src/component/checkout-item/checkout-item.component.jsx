@@ -6,8 +6,17 @@ import './checkout-item.styles.scss';
 
 const CheckoutItem = ({ cartItem }) => {
     // const {clearItemFromCart}=useContext(CartContext)
-  const { name, imageUrl, price, quantity } = cartItem;
-
+  const { houseName, housImg, price, quantity } = cartItem;
+  // detail: "Qui ut officia liber"
+  // housImg: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAA
+  // houseName: "Patrick Jarvis"
+  // location: "Quo ex non doloremqu"
+  // price: "211"
+  // quantity: 2
+  // rooms: "Unde qui dolor amet"
+  // squirFeet: "Sit perspiciatis cu"
+  // __v: 0
+  // _id: "630ca0b00d6b2f788647aa2e"
   const { clearItemFromCart, addItemToCart, removeItemToCart } =
     useContext(CartContext);
 
@@ -18,9 +27,9 @@ const CheckoutItem = ({ cartItem }) => {
   return (
     <div className='flex border border-black w-full justify-between text-center my-2 p-2 items-center  h-[80px]'>
       <div className='w-[14%]'>
-        <img src={imageUrl} className='w-full md:w-[50%] ' alt={`${name}`} />
+        <img src={housImg} className='w-full md:w-[50%] ' alt={`${houseName}`} />
       </div>
-      <span className='name  w-[20%] text-[11px]  md:text-lg '>  {name} </span>
+      <span className='name  w-[20%] text-[11px]  md:text-lg '>  {houseName} </span>
       <span className='flex  w-[20%]  text-[11px]  md:text-lg justify-between'>
         <div className="w-[50%] mx-auto flex   justify-between ">
 

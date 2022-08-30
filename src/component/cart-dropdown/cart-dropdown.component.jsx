@@ -11,6 +11,7 @@ import "./cart-dropdown.styles.scss";
 const CartDropdown = () =>{
   const Navigate = useNavigate()
     const {cartItems,setIsCartOpen}= useContext(CartContext)
+    console.log("dropdown items",cartItems)
     
 
     const goToCheackOut = ()=>{
