@@ -15,6 +15,10 @@ const Directory = ({categories}) => {
   const Navigate = useNavigate()
   const [storageData, setStorageData] =useState([]);
   // console.log("categories kkkkkk",categories)
+  const [find, setFind]=useState(categories)
+  const handlechange =(e)=>{
+    setFind(categories.filter(item=>item.location.toLowerCase().includes(e.target.value)))
+}
   const shopKnow = (item) => {
     // console.log("item", item);
   
@@ -43,13 +47,13 @@ const Directory = ({categories}) => {
    <>
 
    <div className="h-screen bg-slate-50 justify-center items-center w-full  ">
-
-      
-
-     <div className=" grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-2  md:p-5 mb-12 ">
+ 
+  <div className=" flex flex-col items-center w-full mx-auto border border-yellow-600 rounded-md">
+          <input type="search" placeholder='search Location'onChange={(e)=>handlechange(e)}  className=" w-[70%] mx-auto mt-5 h-[80px] p-1 rounded-md"/>
+          <div className=" grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-2  md:p-5 mb-12 ">
                 
      
-                {categories.map((item) => {
+                {find.map((item) => {
                   // console.log("items data",item)
                   return (
                     <div className="w-full p-1  md:p-2 my-12  " key={item['id']}>
@@ -81,6 +85,25 @@ const Directory = ({categories}) => {
                 })}
               </div> 
 
+
+
+
+
+
+{/* 
+          {Product.map((item)=>{
+        return(
+            <div>{item.name}</div>
+        )
+    })
+
+
+    } */}
+
+          </div>
+      
+
+    
    
    </div>
    </>
